@@ -13,38 +13,18 @@ public class LeftPanel : MonoBehaviour
     {
         model.ValueChanged += (mode, value) =>
         {
+            _lblVoltageAc.text = "0";
+            _lblResistance.text = "0";
+            _lblVoltageAd.text = "0";
+            _lblAmpere.text = "0";
+            
             switch (mode)
             {
-                case Mode.NONE:
-                    _lblVoltageAc.text = "0";
-                    _lblResistance.text = "0";
-                    _lblVoltageAd.text = "0";
-                    _lblAmpere.text = "0";
-                    break;
-                case Mode.VOLTAGE_AC:
-                    _lblVoltageAc.text = $"{value}";
-                    _lblResistance.text = "0";
-                    _lblVoltageAd.text = "0";
-                    _lblAmpere.text = "0";
-                    break;
-                case Mode.VOLTAGE_DC:
-                    _lblVoltageAc.text = "0";
-                    _lblResistance.text = "0";
-                    _lblVoltageAd.text = $"{value}";
-                    _lblAmpere.text = "0";
-                    break;
-                case Mode.RESISTANCE:
-                    _lblVoltageAc.text = "0";
-                    _lblResistance.text = $"{value}";
-                    _lblVoltageAd.text = "0";
-                    _lblAmpere.text = "0";
-                    break;
-                case Mode.AMPERAGE:
-                    _lblVoltageAc.text = "0";
-                    _lblResistance.text = "0";
-                    _lblVoltageAd.text = "0";
-                    _lblAmpere.text = $"{value}";
-                    break;
+                case Mode.VOLTAGE_AC: _lblVoltageAc.text = $"{value}"; break;
+                case Mode.VOLTAGE_DC: _lblVoltageAd.text = $"{value}"; break;
+                case Mode.RESISTANCE: _lblResistance.text = $"{value}"; break;
+                case Mode.AMPERAGE: _lblAmpere.text = $"{value}"; break;
+                case Mode.NONE: break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(mode), mode, null);
             }

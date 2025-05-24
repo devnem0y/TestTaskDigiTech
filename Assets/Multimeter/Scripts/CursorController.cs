@@ -3,15 +3,12 @@ using UnityEngine;
 
 public class CursorController : MonoBehaviour
 {
-    [SerializeField] private Transform _cursor;
-    [SerializeField] private float[] _anglesX;
-    
     [SerializeField] private MeshRenderer _meshCursor;
     [SerializeField] private MeshRenderer _MeshArrow;
     [SerializeField] private Material[] _materials;
+    [SerializeField] private float[] _anglesX;
 
     private bool _isCursorLocked = true;
-
     private int _currentModeIndex;
     
     public event Action<int> ModeChanged;
@@ -37,7 +34,7 @@ public class CursorController : MonoBehaviour
 
     private void SelectMode()
     {
-        _cursor.localRotation = Quaternion.Euler(_anglesX[_currentModeIndex], -90f, -90f);
+        transform.localRotation = Quaternion.Euler(_anglesX[_currentModeIndex], -90f, -90f);
         ModeChanged?.Invoke(_currentModeIndex);
     }
     
