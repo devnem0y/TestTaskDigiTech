@@ -6,12 +6,18 @@ public class CursorController : MonoBehaviour
     [SerializeField] private MeshRenderer _meshCursor;
     [SerializeField] private MeshRenderer _MeshArrow;
     [SerializeField] private Material[] _materials;
-    [SerializeField] private float[] _anglesX;
+    [SerializeField] private StageStorage _stageStorage;
 
+    private int _length;
     private bool _isCursorLocked = true;
     private int _currentModeIndex;
     
-    public event Action<int> ModeChanged;
+    public event Action<Mode> ModeChanged;
+
+    private void Awake()
+    {
+        _length = _stageStorage.GetStageCount();
+    }
 
     private void Update()
     {
@@ -22,11 +28,11 @@ public class CursorController : MonoBehaviour
         switch (scroll)
         {
             case > 0f:
-                _currentModeIndex = (_currentModeIndex + 1) % _anglesX.Length;
+                _currentModeIndex = (_currentModeIndex + 1) % _length;
                 SelectMode();
                 break;
             case < 0f:
-                _currentModeIndex = (_currentModeIndex - 1 + _anglesX.Length) % _anglesX.Length;
+                _currentModeIndex = (_currentModeIndex - 1 + _length) % _length;
                 SelectMode();
                 break;
         }
@@ -34,8 +40,10 @@ public class CursorController : MonoBehaviour
 
     private void SelectMode()
     {
-        transform.localRotation = Quaternion.Euler(_anglesX[_currentModeIndex], -90f, -90f);
-        ModeChanged?.Invoke(_currentModeIndex);
+        var stage = _stageStorage.GetStageByIndex(_currentModeIndex);
+        
+        transform.localRotation = Quaternion.Euler(stage.Rotation);
+        ModeChanged?.Invoke(stage.Mode);
     }
     
     private void ReplaceMaterial(bool selected)

@@ -6,8 +6,7 @@ public class Multimeter : MonoBehaviour, IMultimeter
 {
     [SerializeField] private CursorController _cursor;
     [SerializeField] private TMP_Text _display;
-
-    private Mode _mode = Mode.NONE;
+    
     private string _displayValue;
 
     //TODO: По ТЗ хардкод
@@ -23,20 +22,19 @@ public class Multimeter : MonoBehaviour, IMultimeter
 
     private void OnDestroy()
     {
-        _cursor.ModeChanged += SwitchMode;
+        _cursor.ModeChanged -= SwitchMode;
     }
 
     public void Init()
     {
-        SwitchMode(_mode.GetHashCode());
+        SwitchMode(Mode.NONE);
     }
 
-    private void SwitchMode(int index)
+    private void SwitchMode(Mode mode)
     {
-        _mode = (Mode) index;
         float value;
         
-        switch (_mode)
+        switch (mode)
         {
             case Mode.NONE:
                 _displayValue = "0";
@@ -61,6 +59,6 @@ public class Multimeter : MonoBehaviour, IMultimeter
         }
         
         _display.text = _displayValue;
-        ValueChanged?.Invoke(_mode, _displayValue);
+        ValueChanged?.Invoke(mode, _displayValue);
     }
 }

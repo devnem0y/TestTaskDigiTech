@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dadd3cb8394e28802ef84ec23e5752, type: 3}
+  m_Name: StageStorage
+  m_EditorClassIdentifier: 
+  stages:
+  - name: None
+    rotation: {x: -27, y: -90, z: -90}
+    mode: 0
+  - name: VoltageAc
+    rotation: {x: 0, y: -90, z: -90}
+    mode: 1
+  - name: VoltageDc
+    rotation: {x: 35, y: -90, z: -90}
+    mode: 2
+  - name: Resistance
+    rotation: {x: 89.6, y: -90, z: -90}
+    mode: 3
+  - name: Amperage
+    rotation: {x: 150, y: -90, z: -90}
+    mode: 4
